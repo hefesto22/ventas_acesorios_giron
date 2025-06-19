@@ -17,7 +17,11 @@ class CarritoWidget extends BaseWidget
         // Obtenemos los IDs del carrito desde la sesión
         $carrito = session('carrito', []);
 
-        return Producto::query()->whereIn('id', $carrito);
+        // $carrito es un arreglo asociativo [id => cantidad].
+        // Debemos obtener solo las llaves (IDs) para filtrar
+        $ids = array_keys($carrito);
+
+        return Producto::query()->whereIn('id', $ids);
     }
 
     protected function getTableColumns(): array
