@@ -71,4 +71,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(User::class, 'created_by');
     }
+
+    protected static function booted()
+    {
+        static::updating(function ($user) {
+            if ($user->email === 'admin@gmail.com' && $user->isDirty('estado') && $user->estado === false) {
+                throw new \Exception('No puedes desactivar al usuario administrador principal.');
+            }
+        });
+    }
 }

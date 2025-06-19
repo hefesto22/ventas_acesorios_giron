@@ -19,8 +19,6 @@ class DatabaseSeeder extends Seeder
             'Admin',
             'Propietario',
             'Vendedor',
-            'Contador',
-            'Mecanico',
         ];
 
         foreach ($roles as $roleName) {
@@ -34,8 +32,9 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678'), // puedes cambiar la contraseña aquí
+            'password' => Hash::make('12345678'),
             'role_id' => $adminRole->id,
+            'estado' => true, // Siempre activo
         ]);
     }
 }

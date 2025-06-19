@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('estado')->default(true); // true = activo, false = inactivo
             $table->rememberToken();
             $table->timestamps();
 
@@ -34,6 +35,7 @@ return new class extends Migration
             // Campo de relación a quien creó el usuario
             $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
         });
+
 
         // Tabla de tokens de reseteo de contraseña
         Schema::create('password_reset_tokens', function (Blueprint $table) {
